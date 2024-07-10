@@ -1,0 +1,16 @@
+<c-carousel [dark]="false" [wrap]="false">
+  <c-carousel-inner>
+    <c-carousel-item *ngFor="let slideChunk of chunkedSlides; index as i;">
+      <div class="row">
+        <div class="col" *ngFor="let item of slideChunk">
+          <ng-container *ngTemplateOutlet="template; context: { $implicit: item }"></ng-container>
+        </div>
+      </div>
+    </c-carousel-item>
+  </c-carousel-inner>
+  <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+  <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+</c-carousel>
+
+
+

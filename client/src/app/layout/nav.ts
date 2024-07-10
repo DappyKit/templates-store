@@ -2,67 +2,27 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'my templates',
+    name: 'My templates',
     url: '/templates',
-    iconComponent: { name: 'cil-speedometer' },
+    iconComponent: { name: '' },
     badge: {
       color: 'info',
-      text: 'NEW'
+      text: ''
     }
   },
   {
-    name: 'my apps',
+    name: 'My apps',
     url: '/apps',
-    iconComponent: { name: 'cil-speedometer' },
+    iconComponent: { name: '' },
     badge: {
       color: 'info',
-      text: 'NEW'
+      text: ''
     }
   },
-  {
-    title: true,
-    name: 'Theme'
-  },
-  {
-    name: 'Colors',
-    url: '/theme/colors',
-    iconComponent: { name: 'cil-drop' }
-  },
-  {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
-    children: [
-      {
-        name: 'Login',
-        url: '/login',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Register',
-        url: '/register',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Error 404',
-        url: '/404',
-        icon: 'nav-icon-bullet'
-      },
-      {
-        name: 'Error 500',
-        url: '/500',
-        icon: 'nav-icon-bullet'
-      }
-    ]
-  },
-  {
-    title: true,
-    name: 'Links',
-    class: 'mt-auto'
-  },
+
   {
     name: 'Docs',
-    url: 'https://coreui.io/angular/docs/5.x/',
+    url: 'https://github.com/DappyKit/templates-store',
     iconComponent: { name: 'cil-description' },
     attributes: { target: '_blank' }
   }

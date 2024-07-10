@@ -1,0 +1,36 @@
+.app-default-template {
+  &_questions {
+    margin: 20px 0;
+  }
+
+  &_question-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+
+  &_question {
+    width: 100%;
+  }
+
+  &_plus-button {
+    display: flex;
+    justify-content: center;
+  }
+
+  &_remove-button {
+    align-self: center;
+  }
+
+  &_submit-button-container {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    background-color: rgb(243, 244, 247);
+    z-index: 1000;
+    transition: transform 0.3s ease-out;
+  }
+}

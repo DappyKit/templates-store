@@ -1,6 +1,6 @@
+import { DefaultTemplateComponent } from './views/pages/templates-dashboard/default-template/default-template.component';
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout';
-import { TemplatesDashboardComponent } from './views/pages/templates-dashboard/templates-dashboard.component';
 import { canMatchGuard } from './guards/canMatchAuth.guard';
 
 export const routes: Routes = [
@@ -11,9 +11,9 @@ export const routes: Routes = [
     children: [
       {
         path: 'templates',
-        component: TemplatesDashboardComponent,
-        canMatch: [canMatchGuard]
-      }
+        loadChildren: () => import('./views/pages/templates-dashboard/routes').then((m) => m.templatesDashboardRoutes),
+        canLoad: [canMatchGuard],
+      },
     ]
   },
   {

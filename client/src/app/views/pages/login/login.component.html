@@ -1,3 +1,27 @@
 @if(qrString$ | async; as qrString){
-<qrcode [qrdata]="qrString" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+<app-modal
+  [modalTitle]="modalTitle"
+  [modalSubTitle]="modalSubTitle"
+  [isModalHeader]="true"
+  [isCloseButton]="false"
+>
+  <ng-container slot="modal-body">
+    <qrcode
+      [qrdata]="qrString"
+      [width]="256"
+      [errorCorrectionLevel]="'M'"
+    ></qrcode>
+    <app-button [buttonColor]="buttonStyle" (click)="login()">
+      <div class="app-login-button">
+        <svg
+          [cIcon]="icons.cilScreenSmartphone"
+          size="lg"
+          title="Smartphone"
+        ></svg>
+        <p class="app-login-button_text">{{ buttonText }}</p>
+        <svg [cIcon]="icons.cilArrowRight" size="lg" title="Arrow right"></svg>
+      </div>
+    </app-button>
+  </ng-container>
+</app-modal>
 }

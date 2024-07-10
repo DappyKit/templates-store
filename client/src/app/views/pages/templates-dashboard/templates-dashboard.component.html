@@ -1,1 +1,65 @@
-<p>templates-dashboard works!</p>
+<div>
+  <form [gutter]="3" cForm cRow>
+    <div class="app-templates-dashboard-input">
+      <c-col xs="auto">
+        <label cLabel class="visually-hidden" for="inputGitHub">
+          Github link
+        </label>
+        <input
+          cFormControl
+          id="inputGitHub"
+          placeholder="Github Link"
+          type="text"
+        />
+      </c-col>
+
+      <c-col xs="auto">
+        <app-button
+          [buttonColor]="importButtonColor"
+          class="app-templates-dashboard_margin"
+        >
+          <div class="app-templates-dashboard-button">
+            <svg
+              [cIcon]="icons.cilCloudDownload"
+              size="lg"
+              title="download button"
+            ></svg>
+            <p class="app-templates-dashboard-button_text">{{ buttonName }}</p>
+          </div>
+        </app-button>
+      </c-col>
+    </div>
+  </form>
+</div>
+
+<div class="app-templates-dashboard_templates">
+  Default template:
+  <ng-container *ngIf="templates.length >= 5; else showRow">
+    <app-multi-item-carousel [items]="templates">
+      <ng-template let-item>
+        <app-template-card
+          [id]="item.id"
+          [title]="item.title"
+          [description]="item.description"
+          [image]="item?.image"
+        ></app-template-card>
+      </ng-template>
+    </app-multi-item-carousel>
+  </ng-container>
+
+  <ng-template #showRow>
+    <div class="row cards-container"> 
+      @for(item of templates; track item.id) {
+      <div class="card-wrapper">
+        <app-template-card
+          [id]="item.id"
+          [title]="item.title"
+          [description]="item.description"
+          (openTemplateEmitter)="goToTemplate(item.id)"
+        ></app-template-card>
+      </div>
+      }
+    </div>
+  </ng-template>
+</div>
+<router-outlet></router-outlet>

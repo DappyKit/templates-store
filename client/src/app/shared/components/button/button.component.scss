@@ -1,0 +1,7 @@
+/* custom-button.component.scss */
+button[disabled] {
+    cursor: not-allowed;
+    color: red;
+    opacity: 0.1;
+  }
+  

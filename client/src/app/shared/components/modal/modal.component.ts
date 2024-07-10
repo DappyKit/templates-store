@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { AfterContentInit, Component, Input } from "@angular/core";
 import {
   ButtonCloseDirective,
   ButtonDirective,
@@ -26,5 +26,8 @@ import {
 })
 export class SharedModalComponent {
   @Input() public isModalHeader!: boolean;
+  @Input() public modalTitle!: string;
+  @Input() public modalSubTitle!: string;
   @Input() public isModalFooter!: boolean;
+  @Input() public isCloseButton!: boolean;
 }

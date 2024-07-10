@@ -1,0 +1,11 @@
+<div class="app-default-template">
+  <div [ngStyle]="{background: image}">
+    <h3>{{title}}</h3>
+    <p>{{description}}</p>
+  </div>
+
+  <app-button (click)="openTemplate()">
+    <svg [cIcon]="icons.cilPlus" size="lg" title="Plus"></svg>
+    Create App
+  </app-button>
+</div>

@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.app-templates-dashboard {
+  &-input {
+    display: flex;
+  }
+  &-button {
+    display: flex;
+    align-items: center;
+
+    &_text {
+      margin: 0 5px;
+    }
+  }
+  &_margin {
+    margin-left: 5px;
+  }
+  &_templates {
+    margin: 100px 0;
+  }
+}
+
+.carousel-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.carousel-item .col {
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .app-templates-dashboard-button_text {
+    display: none;
+  }
+}
+.cards-container {
+  display: flex;
+}
+
+.card-wrapper {
+    width: calc(100%/5)
+}

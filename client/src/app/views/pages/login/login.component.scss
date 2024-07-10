@@ -1,6 +1,14 @@
 :host {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.app-login-button {
+  display: flex;
+  align-items: center;
+
+  &_text {
+    margin: 0 5px;
+  }
 }

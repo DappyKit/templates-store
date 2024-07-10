@@ -1,0 +1,16 @@
+<div [formGroup]="form">
+  <div class="mb-3">
+    <label cLabel [attr.for]="question.key">{{ question.label }}</label>
+    <input cFormControl
+           [formControlName]="question.key"
+           [id]="question.key"
+           [type]="question.type"
+    />
+  </div>
+  @if (!isValid) {
+  <div class="errorMessage">{{ question.label }} is required</div>
+  }
+</div>
+
+
+

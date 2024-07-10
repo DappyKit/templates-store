@@ -1,0 +1,122 @@
+<div class="app-default-template">
+  <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        id="title"
+        formControlName="title"
+        class="form-control"
+        placeholder="Enter title"
+        type="text"
+      />
+      @if(templateForm.get('title')?.invalid &&
+      templateForm.get('title')?.touched) {
+      <div class="text-danger">Title is required</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+        placeholder="Enter description"
+      ></textarea>
+      @if( templateForm.get('description')?.invalid &&
+      templateForm.get('description')?.touched ){
+      <div class="text-danger">Description is required</div>
+      }
+    </div>
+
+    <div formArrayName="questions" class="app-default-template_questions">
+      @for(question of questions.controls; track question.value){
+      <div class="app-default-template_question-container">
+        <div [formGroupName]="$index" class="form-group app-default-template_question">
+          <label for="question-{{ $index }}">Question {{ $index + 1 }}:</label>
+
+            @if($index > 0){
+              <app-button (click)="removeQuestion($index)">
+                <svg [cIcon]="icons.cilDelete" size="lg" title="Delete"></svg>
+              </app-button>
+            }
+
+          <input
+            id="question-{{ $index }}"
+            formControlName="question"
+            class="form-control"
+            placeholder="Enter question"
+            type="text"
+          />
+          @if( question?.get('question')?.invalid &&
+          question?.get('question')?.touched){
+          <div class="text-danger">Question is required</div>
+          }
+          <div formGroupName="options">
+            <div class="form-group">
+              <label for="option1-{{ $index }}">Option 1</label>
+              <input
+                id="option1-{{ $index }}"
+                formControlName="option1"
+                class="form-control"
+                placeholder="Enter option 1"
+                type="text"
+              />
+              @if( question.get('options')?.get('option1')?.invalid &&
+              question.get('options')?.get('option1')?.touched ){
+              <div class="text-danger">Option 1 is required</div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="option2-{{ $index }}">Option 2</label>
+              <input
+                id="option2-{{ $index }}"
+                formControlName="option2"
+                class="form-control"
+                placeholder="Enter option 2"
+                type="text"
+              />
+              @if( question?.get('options')?.get('option2')?.invalid &&
+              question?.get('options')?.get('option2')?.touched ){
+              <div class="text-danger">Option 2 is required</div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="option3-{{ $index }}">Option 3</label>
+              <input
+                id="option3-{{ $index }}"
+                formControlName="option3"
+                class="form-control"
+                placeholder="Enter option 3"
+                type="text"
+              />
+              @if( question?.get('options')?.get('option3')?.invalid &&
+              question?.get('options')?.get('option3')?.touched ){
+              <div class="text-danger">Option 3 is required</div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="app-default-template_plus-button">
+      <app-button (buttonClick)="addQuestion()" [disabled]="templateForm.invalid">
+        <svg [cIcon]="icons.cilPlus" size="lg" title="Plus"></svg>
+      </app-button> 
+  
+  
+    </div>
+    <div class="app-default-template_submit-button-container">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="templateForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
