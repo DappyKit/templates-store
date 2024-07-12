@@ -1,11 +1,14 @@
-import { SessionService } from "./sessionService.service";
 import { environment } from "./../../environments/environment";
 import { IChannel } from "./../interfaces/IChannel.interface";
 import { Injectable } from "@angular/core";
 import { createAppClient, viemConnector } from "@farcaster/auth-client";
-import { Router } from "@angular/router";
 import { IStatus } from "../interfaces/IStatus.interface";
 import { getDomainFromUrl } from "../utility/getDomainFromUrl";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { IUser } from "../interfaces/IUser.interface";
+import {ApiPath} from "../constants/api-url.config"
+
 @Injectable({
   providedIn: "root",
 })
@@ -13,6 +16,7 @@ export class AuthService {
   private appClient: any;
 
   constructor(
+    private _http: HttpClient
   ) {
     this.initializeAppClient();
   }
@@ -31,6 +35,7 @@ export class AuthService {
         domain: getDomainFromUrl(environment.url),
       });
       const { data } = response;
+      console.log('data', data);
       return data;
     } catch (error) {
       throw error;
@@ -58,6 +63,11 @@ export class AuthService {
       message,
       signature,
     });
+
     return success;
+  }
+
+  public login(user: IUser): Observable<any> {
+     this._http.post(ApiPath.LOGIN, user);
   }
 }
