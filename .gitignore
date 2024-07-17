@@ -57,7 +57,8 @@ server/pnpm-debug.log*
 server/yarn-debug.log*
 server/yarn-error.log*
 server/lerna-debug.log*
-
+server/.env.production
+server/.env.development
 # OS
 server/.DS_Store
 

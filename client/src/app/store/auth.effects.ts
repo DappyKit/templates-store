@@ -11,7 +11,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { AuthActions } from "./auth.actions";
 import { IChannel } from "../interfaces/IChannel.interface";
 import { IStatus, StatusState } from "../interfaces/IStatus.interface";
-import { IUser, User } from "../interfaces/IUser.interface";
+import { User } from "../interfaces/IUser.interface";
 import { Router } from "@angular/router";
 import {
   FARCASTER_USER,
@@ -40,7 +40,7 @@ export class AuthEffects {
       ofType(AuthActions.getStatus),
       switchMap(({ channelToken }) =>
         from(this.authService.getStatus(channelToken)).pipe(
-          switchMap((status: IStatus) => {
+          mergeMap((status: IStatus) => {
             const completedStatus = status.state === StatusState.completed;
             if (completedStatus) {
               const user = new User(status);
@@ -49,19 +49,28 @@ export class AuthEffects {
                 status
               );
               this._sessionService.setItemToLocalStorage(FARCASTER_USER, user);
-              this._router.navigate(["templates"]);
-              return [
-                AuthActions.getStatusSuccess({ status }),
-                AuthActions.setUser({ user }),
-                AuthActions.verifySignInSuccess({
-                  isLoggedIn: completedStatus,
-                }),
-              ];
+              this._router.navigate(['templates']);
+
+              return this.authService.login(status).pipe(
+                mergeMap(() => [
+                  AuthActions.getStatusSuccess({ status }),
+                  AuthActions.setUser({ user }),
+                  AuthActions.verifySignInSuccess({
+                    isLoggedIn: completedStatus,
+                  }),
+                ]),
+                catchError((loginError) => {
+                  console.error('Login error:', loginError);
+                  return of(AuthActions.getStatusError({ error: loginError }));
+                })
+              );
             } else {
               return [AuthActions.getStatusSuccess({ status })];
             }
           }),
-          catchError((error) => of(AuthActions.getStatusError({ error })))
+          catchError((error) =>
+            of(AuthActions.getStatusError({ error: error }))
+          )
         )
       )
     )

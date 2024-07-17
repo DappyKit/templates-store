@@ -18,6 +18,7 @@ import { provideState, provideStore } from '@ngrx/store';
 import { AuthEffects } from './store/auth.effects';
 import { authReducer } from './store/auth.reducer';
 import { environment } from 'src/environments/environment';
+import { provideHttpClient } from '@angular/common/http';
 
 
 export const appConfig: ApplicationConfig = {
@@ -39,6 +40,7 @@ export const appConfig: ApplicationConfig = {
         maxAge: 25, // Retains last 25 states
         logOnly: environment.production, // Restrict extension to log-only mode in production
       })
-    )
+    ),
+    provideHttpClient(),
 ]
 };

@@ -6,7 +6,7 @@ import { ButtonComponent } from "src/app/shared/components/button/button.compone
 import { BUTTON_STYLE } from "src/app/constants/buttonColor";
 import { freeSet } from "@coreui/icons";
 import { IconDirective } from "@coreui/icons-angular";
-import {createNewGUID} from "../../../utility/generateId"
+
 import {
   CarouselComponent,
   CarouselControlComponent,
@@ -63,7 +63,7 @@ export class TemplatesDashboardComponent {
   public importButtonColor = BUTTON_STYLE.primary;
   public buttonName = "Import template";
   public templates: ITemplateItem[] = [
-    { id: createNewGUID() , title: 'Card 1', description: 'Content for card 1', image: 'https://via.placeholder.com/150' }
+    { id: '' , title: 'Card 1', description: 'Content for card 1', image: 'https://via.placeholder.com/150' }
   ];
   constructor(private router: Router){
 

@@ -3,7 +3,7 @@ import { IChannel } from "./../interfaces/IChannel.interface";
 import { Injectable } from "@angular/core";
 import { createAppClient, viemConnector } from "@farcaster/auth-client";
 import { IStatus } from "../interfaces/IStatus.interface";
-import { getDomainFromUrl } from "../utility/getDomainFromUrl";
+import { getDomainFromUrl } from "../utilities/getDomainFromUrl";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { IUser } from "../interfaces/IUser.interface";
@@ -67,7 +67,7 @@ export class AuthService {
     return success;
   }
 
-  public login(user: IUser): Observable<any> {
-     this._http.post(ApiPath.LOGIN, user);
+  public login(status: IUser): Observable<any> {
+     return this._http.post(ApiPath.LOGIN, status);
   }
 }
