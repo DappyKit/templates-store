@@ -7,7 +7,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
-   signIn(@Body() status: any) {
+   async signIn(@Body() status: any): Promise<boolean> {
    return this.authService.signIn(status);
   }
 }
