@@ -21,10 +21,6 @@ export const selectQRcode: MemoizedSelector<object, string | null> =
     selectChannel,
     (channel: IChannel | null) => channel?.connectUri ?? null
   );
-export const isLoggedIn: MemoizedSelector<object, boolean | null> = createSelector(
-  selectAuthState,
-  (state: AuthState) => state.isLoggedIn
-);
 
 export const user: MemoizedSelector<object, IUser | null> = createSelector(
   selectAuthState,

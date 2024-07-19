@@ -1,4 +1,4 @@
-import { selectChannel, selectQRcode, isLoggedIn, user } from './auth.selectors';
+import { selectChannel, selectQRcode, user } from './auth.selectors';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthState } from './auth.reducer';
@@ -16,7 +16,6 @@ export class AuthFacadeService {
 
   public selectQRcode$: Observable<string | null> = this.store.select(selectQRcode);
   public channel$: Observable<IChannel | null> = this.store.select(selectChannel);
-  public isLoggedIn$: Observable<boolean | null> = this.store.select(isLoggedIn);
   public user$: Observable<IUser | null> = this.store.select(user);
 
   constructor(private store: Store<AuthState>) {}
@@ -25,7 +24,7 @@ export class AuthFacadeService {
     this.store.dispatch(AuthActions.createChannel());
   }
 
-  public verifyMessage(sessionData: any): void {
-    this.store.dispatch(AuthActions.verifySignIn(sessionData))
+  public login(sessionData: any): void {
+    this.store.dispatch(AuthActions.login(sessionData))
   }
 }

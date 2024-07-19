@@ -35,7 +35,6 @@ export class AuthService {
         domain: getDomainFromUrl(environment.url),
       });
       const { data } = response;
-      console.log('data', data);
       return data;
     } catch (error) {
       throw error;
@@ -55,19 +54,7 @@ export class AuthService {
     return data;
   }
 
-  public async verifySignInMessage(sessionData: any): Promise<boolean> {
-    const { nonce, domain, message, signature } = sessionData;
-    const { data, success, fid } = await this.appClient.verifySignInMessage({
-      nonce,
-      domain: getDomainFromUrl(environment.url),
-      message,
-      signature,
-    });
-
-    return success;
-  }
-
-  public login(status: IUser): Observable<any> {
+  public login(status: any): Observable<IUser> {
      return this._http.post(ApiPath.LOGIN, status);
   }
 }

@@ -14,10 +14,9 @@ export const AuthActions = createActionGroup({
     'Get Status': props<{ channelToken: string }>(),
     'Get Status Success': props<{ status: IStatus }>(),
     'Get Status Error': props<{ error: Error }>(),
-    'Set User': props<{ user: IUser }>(),
-    'Verify SignIn': props<{sessionData: any}>(),
-    'Verify SignIn Success': props<{ isLoggedIn: boolean }>(),
-    'Verify SignIn Error': props<{ error: Error }>(),
+    'Login':  props<{ sessionData: IStatus }>(),
+    'Login Success': props<{  user: IUser }>(),
+    'Login Error': props<{ error: Error }>(),
   },
 });
 

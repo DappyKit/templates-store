@@ -5,6 +5,7 @@ import { AuthFacadeService } from "./../store/facade.service";
 import { SessionService } from "./../services/sessionService.service";
 import { filter, map, take } from "rxjs/operators";
 import { SESSION_VERIFICATION_DATA } from "../constants/localStorage.injectionToken";
+import { IUser } from "../interfaces/IUser.interface";
 
 export const canMatchGuard: CanMatchFn = (): Observable<boolean> | boolean => {
   const sessionService = inject(SessionService);
@@ -19,12 +20,12 @@ export const canMatchGuard: CanMatchFn = (): Observable<boolean> | boolean => {
     router.navigate(["login"]);
     return false;
   } else {
-    authFacadeService.verifyMessage(sessionData);
-    return authFacadeService.isLoggedIn$.pipe(
-      filter((isLoggedIn) => isLoggedIn !== null),
+    authFacadeService.login(sessionData);
+    return authFacadeService.user$.pipe(
+      filter((user) => user !== null),
       take(1),
-      map((isLoggedIn) => {
-        if (!isLoggedIn) {
+      map((user: IUser | null) => {
+        if (!user) {
           router.navigate(["login"]);
           return false;
         }

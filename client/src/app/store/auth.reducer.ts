@@ -8,14 +8,12 @@ export interface AuthState {
   channel: IChannel | null;
   user: IUser | null;
   status: IStatus | null;
-  isLoggedIn: null | boolean;
 }
 
 export const initialState: AuthState = {
   channel: null,
   user: null,
   status: null,
-  isLoggedIn: null,
 };
 
 export const authReducer = createReducer<AuthState>(
@@ -34,7 +32,6 @@ export const authReducer = createReducer<AuthState>(
   })),
   on(AuthActions.getStatus, (state) => ({
     ...state,
-    // Optionally clear status or any other state if needed
   })),
   on(AuthActions.getStatusSuccess, (state, { status }) => ({
     ...state,
@@ -44,19 +41,15 @@ export const authReducer = createReducer<AuthState>(
     ...state,
     // Handle error
   })),
-  on(AuthActions.setUser, (state, { user }) => ({
-    ...state,
-    user,
-  })),
-  on(AuthActions.verifySignIn, (state) => ({
+  on(AuthActions.login, (state) => ({
     ...state
   })),
-  on(AuthActions.verifySignInSuccess, (state, { isLoggedIn }) => {
+  on(AuthActions.loginSuccess, (state, { user }) => {
     return ({
     ...state,
-    isLoggedIn,
+    user,
   })}),
-  on(AuthActions.verifySignInError, (state, { error }) => ({
+  on(AuthActions.loginError, (state, { error }) => ({
     ...state,
     // Handle error
   }))

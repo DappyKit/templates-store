@@ -12,7 +12,7 @@
       <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
 
-    @if(isLoggedIn$ | async; as isLoggedIn){
+    @if(user$ | async; as user){
     <c-header-nav class="mx-0">
       <ng-container *ngTemplateOutlet="userDropdown" />
     </c-header-nav>
@@ -37,7 +37,7 @@
       <c-avatar
         shape="rounded-1"
         [size]="'md'"
-        [src]="(user$ | async)?.pfpUrl"
+        [src]="(user$ | async)?.photoUrl"
         status="success"
         textColor="primary"
         alt="User avatar"

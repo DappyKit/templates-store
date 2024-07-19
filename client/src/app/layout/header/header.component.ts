@@ -63,7 +63,6 @@ import { AuthFacadeService } from "src/app/store/facade.service";
 })
 export class DefaultHeaderComponent extends HeaderComponent {
   @Input() sidebarId: string = "sidebar1";
-  public isLoggedIn$: Observable<boolean | null>;
   public user$: Observable<IUser | null>;
   readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   readonly #colorModeService = inject(ColorModeService);
@@ -86,7 +85,6 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   constructor(private _authFacade: AuthFacadeService) {
     super();
-    this.isLoggedIn$ = this._authFacade.isLoggedIn$;
     this.user$ = this._authFacade.user$;
   }
 }
