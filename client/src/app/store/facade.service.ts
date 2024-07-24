@@ -6,6 +6,7 @@ import { AuthActions } from './auth.actions';
 import { Observable } from 'rxjs';
 import { IChannel } from '../interfaces/IChannel.interface';
 import { IUser } from '../interfaces/IUser.interface';
+import { IStatus } from '../interfaces/IStatus.interface';
 
 
 
@@ -24,7 +25,7 @@ export class AuthFacadeService {
     this.store.dispatch(AuthActions.createChannel());
   }
 
-  public login(sessionData: any): void {
-    this.store.dispatch(AuthActions.login(sessionData))
+  public login(sessionData: IStatus): void {
+    this.store.dispatch(AuthActions.login({sessionData}))
   }
 }

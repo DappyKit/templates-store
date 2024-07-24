@@ -1,9 +1,11 @@
 @if(qrString$ | async; as qrString){
 <app-modal
+  [id]="id"
   [modalTitle]="modalTitle"
   [modalSubTitle]="modalSubTitle"
   [isModalHeader]="true"
-  [isCloseButton]="false"
+  [isCloseButton]="true"
+  [modalVisible]="modalVisible"
 >
   <ng-container slot="modal-body">
     <qrcode

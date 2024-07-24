@@ -2,7 +2,7 @@ import { SessionService } from "../services/sessionService.service";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { from, of } from "rxjs";
-import { mergeMap, catchError, switchMap, map } from "rxjs/operators";
+import { catchError, switchMap, map } from "rxjs/operators";
 import { AuthService } from "src/app/services/auth.service";
 import { AuthActions } from "./auth.actions";
 import { IChannel } from "../interfaces/IChannel.interface";
@@ -15,9 +15,9 @@ export class AuthEffects {
   public createChannel$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.createChannel),
-      mergeMap(() =>
+      switchMap(() =>
         from(this.authService.createChannel()).pipe(
-          mergeMap((channel: IChannel) => [
+          switchMap((channel: IChannel) => [
             AuthActions.createChannelSuccess({ channel }),
             AuthActions.getStatus({ channelToken: channel.channelToken }),
           ]),
@@ -32,7 +32,7 @@ export class AuthEffects {
       ofType(AuthActions.getStatus),
       switchMap(({ channelToken }) =>
         from(this.authService.getStatus(channelToken)).pipe(
-          mergeMap((status: IStatus) => {
+          switchMap((status: IStatus) => {
             const completedStatus = status.state === StatusState.completed;
             if (completedStatus) {
               this._sessionService.setItemToLocalStorage(
@@ -40,18 +40,8 @@ export class AuthEffects {
                 status
               );
               this._router.navigate(["templates"]);
-              return this.authService.login(status).pipe(
-                mergeMap(( user ) => [
-                  AuthActions.getStatusSuccess({ status }),
-                  AuthActions.loginSuccess({ user }),
-                ]),
-                catchError((loginError) => {
-                  return of(AuthActions.getStatusError({ error: loginError }));
-                })
-              );
-            } else {
-              return [AuthActions.getStatusSuccess({ status })];
             }
+            return of(AuthActions.getStatusSuccess({ status }));
           }),
           catchError((error) =>
             of(AuthActions.getStatusError({ error: error }))
@@ -64,13 +54,12 @@ export class AuthEffects {
   public login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      switchMap((sessionData) => {
-        console.log('--effect--sessionData', sessionData);
+      switchMap(({ sessionData }) => {
         return this.authService.login(sessionData).pipe(
-          map(( user ) => AuthActions.loginSuccess({ user })),
+          map((user) => AuthActions.loginSuccess({ user })),
           catchError((error) => of(AuthActions.loginError({ error })))
-        )
-})
+        );
+      })
     )
   );
 

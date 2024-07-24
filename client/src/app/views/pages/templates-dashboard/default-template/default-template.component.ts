@@ -1,3 +1,5 @@
+import { AuthFacadeService } from 'src/app/store/facade.service';
+import { TemplateService } from './../../../../services/template.service';
 import { Component } from "@angular/core";
 import {
   FormBuilder,
@@ -14,6 +16,7 @@ import { RouterLink } from "@angular/router";
 import { ButtonComponent } from "src/app/shared/components/button/button.component";
 import { IconDirective } from "@coreui/icons-angular";
 import { freeSet } from "@coreui/icons";
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: "app-default-template",
@@ -33,7 +36,10 @@ export class DefaultTemplateComponent {
   public templateForm: FormGroup;
   public icons = freeSet;
   public defaultTemplateIcon = "cil-plus";
-  constructor(private formBuilder: FormBuilder) {
+  private _user$ = this._authFacadeService.user$;
+  constructor(private formBuilder: FormBuilder, private _templateService: TemplateService,
+    private _authFacadeService: AuthFacadeService
+  ) {
     this.templateForm = this.formBuilder.group({
       title: ["", Validators.required],
       description: ["", Validators.required],
@@ -67,8 +73,10 @@ export class DefaultTemplateComponent {
     this.questions.removeAt(index);
   }
 
-  public onSubmit(): void {
-    if (this.templateForm.valid) {
+  public async onSubmit(): Promise<void> {
+    const user = await firstValueFrom(this._user$);
+    if (this.templateForm.valid && user && user.id) {
+      this._templateService.createTemplate(user.id, this.templateForm.value);
       console.log("Form Submitted", this.templateForm.value);
     } else {
       console.log("Form is invalid");

@@ -1,4 +1,3 @@
-import { DefaultTemplateComponent } from './views/pages/templates-dashboard/default-template/default-template.component';
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout';
 import { canMatchGuard } from './guards/canMatchAuth.guard';
@@ -25,11 +24,6 @@ export const routes: Routes = [
     path: '500',
     loadComponent: () => import('./views/pages/page500/page500.component').then(m => m.Page500Component),
     data: { title: 'Page 500' }
-  },
-  {
-    path: 'login',
-    loadComponent: () => import('./views/pages/login/login.component').then(m => m.LoginComponent),
-    data: { title: 'Login Page' }
   },
   { path: '**', redirectTo: '404' }
 ];

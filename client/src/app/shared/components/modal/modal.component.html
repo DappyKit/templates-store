@@ -1,10 +1,11 @@
 <c-modal
   [keyboard]="false"
   [transition]="false"
+  [visible]="modalVisible"
   backdrop="static"
   alignment="center"
-  class="position-static d-block show"
-  id="modalStatic"
+  #modal="cModal"
+  [id]="id"
 >
   @if(isModalHeader){
   <c-modal-header>
@@ -13,13 +14,13 @@
       <p>{{ modalSubTitle }}</p>
     </div>
     @if(isCloseButton){
-    <button cButtonClose></button>
+    <button  (click)="handleClose($event)" cButtonClose></button>
     }
   </c-modal-header>
   }
 
   <c-modal-body class="text-center">
-    <ng-content select="[slot='modal-body']"></ng-content>
+      <ng-content select="[slot='modal-body']"></ng-content>
   </c-modal-body>
   @if(isModalFooter){
   <c-modal-footer>
