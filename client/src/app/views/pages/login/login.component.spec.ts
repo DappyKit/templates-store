@@ -4,21 +4,20 @@ import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angula
 import { LoginComponent } from './login.component';
 import { IconModule } from '@coreui/icons-angular';
 import { IconSetService } from '@coreui/icons-angular';
-import { iconSubset } from '../../../icons/icon-subset';
 import { AuthFacadeService } from 'src/app/store/facade.service';
 import { of } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let iconSetService: IconSetService;
   let authFacadeSpy: jasmine.SpyObj<AuthFacadeService>;
 
   beforeEach(async () => {
     const authFacadeMock = jasmine.createSpyObj('AuthFacadeService', ['createChannel', 'selectQRcode$']);
     authFacadeMock.selectQRcode$ = of('mock-qr-code');
     await TestBed.configureTestingModule({
-    imports: [FormModule, CardModule, GridModule, ButtonModule, IconModule, LoginComponent],
+    imports: [FormModule, CardModule, GridModule, ButtonModule, IconModule, LoginComponent, BrowserAnimationsModule],
     providers: [IconSetService,{
       provide: AuthFacadeService, useValue: authFacadeMock
     }]
@@ -28,9 +27,6 @@ describe('LoginComponent', () => {
   });
 
   beforeEach(() => {
-    iconSetService = TestBed.inject(IconSetService);
-    iconSetService.icons = { ...iconSubset };
-
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public id = MODAL_ID.loginComponent;
   public modalVisible!: boolean;
   private subscription!: Subscription;
+  
   constructor(private _authFacade: AuthFacadeService) {
     this.qrString$ = this._authFacade.selectQRcode$;
   }

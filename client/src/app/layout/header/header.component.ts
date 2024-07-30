@@ -41,8 +41,8 @@ import { AuthFacadeService } from "src/app/store/facade.service";
     HeaderNavComponent,
     NavItemComponent,
     NavLinkDirective,
-    RouterLink,
-    RouterLinkActive,
+    // RouterLink,
+    // RouterLinkActive,
     NgTemplateOutlet,
     BreadcrumbRouterComponent,
     ThemeDirective,
@@ -64,24 +64,24 @@ import { AuthFacadeService } from "src/app/store/facade.service";
 export class DefaultHeaderComponent extends HeaderComponent {
   @Input() sidebarId: string = "sidebar1";
   public user$: Observable<IUser | null>;
-  readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-  readonly #colorModeService = inject(ColorModeService);
-  readonly colorMode = this.#colorModeService.colorMode;
-  readonly #destroyRef: DestroyRef = inject(DestroyRef);
+  // readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  // readonly #colorModeService = inject(ColorModeService);
+  // readonly colorMode = this.#colorModeService.colorMode;
+  // readonly #destroyRef: DestroyRef = inject(DestroyRef);
 
-  readonly colorModes = [
-    { name: "light", text: "Light", icon: "cilSun" },
-    { name: "dark", text: "Dark", icon: "cilMoon" },
-    { name: "auto", text: "Auto", icon: "cilContrast" },
-  ];
+  // readonly colorModes = [
+  //   { name: "light", text: "Light", icon: "cilSun" },
+  //   { name: "dark", text: "Dark", icon: "cilMoon" },
+  //   { name: "auto", text: "Auto", icon: "cilContrast" },
+  // ];
 
-  readonly icons = computed(() => {
-    const currentMode = this.colorMode();
-    return (
-      this.colorModes.find((mode) => mode.name === currentMode)?.icon ??
-      "cilSun"
-    );
-  });
+  // readonly icons = computed(() => {
+  //   const currentMode = this.colorMode();
+  //   return (
+  //     this.colorModes.find((mode) => mode.name === currentMode)?.icon ??
+  //     "cilSun"
+  //   );
+  // });
 
   constructor(private _authFacade: AuthFacadeService) {
     super();
