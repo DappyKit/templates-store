@@ -1,5 +1,5 @@
-import { AuthFacadeService } from 'src/app/store/facade.service';
-import { TemplateService } from './../../../../services/template.service';
+import { AuthFacadeService } from "src/app/store/facade.service";
+import { TemplateService } from "./../../../../services/template.service";
 import { Component } from "@angular/core";
 import {
   FormBuilder,
@@ -7,16 +7,15 @@ import {
   Validators,
   ReactiveFormsModule,
   FormArray,
+  FormControl,
+  AbstractControl,
 } from "@angular/forms";
-import {
-  TemplateIdDirective,
-  ButtonDirective,
-} from "@coreui/angular";
+import { TemplateIdDirective, ButtonDirective, FormModule } from "@coreui/angular";
 import { RouterLink } from "@angular/router";
 import { ButtonComponent } from "src/app/shared/components/button/button.component";
 import { IconDirective } from "@coreui/icons-angular";
 import { freeSet } from "@coreui/icons";
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom } from "rxjs";
 
 @Component({
   selector: "app-default-template",
@@ -27,7 +26,8 @@ import { firstValueFrom } from 'rxjs';
     IconDirective,
     ButtonDirective,
     RouterLink,
-    ButtonComponent
+    ButtonComponent,
+    FormModule
   ],
   templateUrl: "./default-template.component.html",
   styleUrls: ["./default-template.component.scss"],
@@ -37,7 +37,10 @@ export class DefaultTemplateComponent {
   public icons = freeSet;
   public defaultTemplateIcon = "cil-plus";
   private _user$ = this._authFacadeService.user$;
-  constructor(private formBuilder: FormBuilder, private _templateService: TemplateService,
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private _templateService: TemplateService,
     private _authFacadeService: AuthFacadeService
   ) {
     this.templateForm = this.formBuilder.group({
@@ -51,28 +54,42 @@ export class DefaultTemplateComponent {
     return this.templateForm.get("questions") as FormArray;
   }
 
-  createQuestion(): FormGroup {
-    return this.formBuilder.group({
-      question: ["", Validators.required],
-      options: this.formBuilder.group({
-        option1: ["", Validators.required],
-        option2: ["", Validators.required],
-        option3: ["", Validators.required],
-      }),
-    });
-  }
-
-  public addQuestion(): void {
+  addQuestion(): void {
     this.questions.push(this.createQuestion());
   }
 
-  public removeQuestion(index: number): void {
-    if(!index){
-      return;
+  removeQuestion(index: number): void {
+    if (index > 0) {
+      this.questions.removeAt(index);
     }
-    this.questions.removeAt(index);
   }
 
+  public setCorrectIndex(questionIndex: number, answerIndex: number): void {
+    const question = this.questions.at(questionIndex);
+    question.get('correctAnswerIndex')?.setValue(answerIndex);
+  }
+
+  public getAnswerControls(questionIndex: number): AbstractControl[] {
+    return (this.questions.at(questionIndex).get('answers') as FormArray).controls;
+  }
+
+  public getAnswerControlName(answerIdx: number): string {
+    return answerIdx.toString();
+  }
+
+
+  createQuestion(): FormGroup {
+    return this.formBuilder.group({
+      question: ["", Validators.required],
+      answers: this.formBuilder.array([this.createAnswer(), this.createAnswer(), this.createAnswer()]),
+      correctAnswerIndex: [0, Validators.required]
+    });
+  }
+  
+  createAnswer(): FormControl {
+    return this.formBuilder.control('', Validators.required);
+  }
+  
   public async onSubmit(): Promise<void> {
     const user = await firstValueFrom(this._user$);
     if (this.templateForm.valid && user && user.id) {
