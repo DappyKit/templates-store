@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   public async createChannel(): Promise<IChannel> {
+    console.log('this.environment.', this.environment)
     try {
       const response = await this.appClient.createChannel({
         siweUri: this.environment.url,

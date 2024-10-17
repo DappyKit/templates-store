@@ -22,8 +22,8 @@ import {
 import { QRCodeModule } from "angularx-qrcode";
 import { Observable, Subscription } from "rxjs";
 import { freeSet } from '@coreui/icons';
-import { BUTTON_STYLE } from "src/app/constants/buttonColor";
-import { MODAL_ID } from "src/app/constants/modal-id";
+import { BUTTON_STYLE } from "../../../constants/buttonColor";
+import { MODAL_ID } from "../../../constants/modal-id";
 
 @Component({
   selector: "app-login",

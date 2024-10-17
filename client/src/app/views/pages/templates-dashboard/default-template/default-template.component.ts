@@ -1,4 +1,3 @@
-import { AuthFacadeService } from "src/app/store/facade.service";
 import { TemplateService } from "./../../../../services/template.service";
 import { Component } from "@angular/core";
 import {
@@ -12,10 +11,12 @@ import {
 } from "@angular/forms";
 import { TemplateIdDirective, ButtonDirective, FormModule } from "@coreui/angular";
 import { RouterLink } from "@angular/router";
-import { ButtonComponent } from "src/app/shared/components/button/button.component";
 import { IconDirective } from "@coreui/icons-angular";
 import { freeSet } from "@coreui/icons";
-import { firstValueFrom } from "rxjs";
+import { firstValueFrom, Observable } from "rxjs";
+import { ButtonComponent } from "../../../../shared/components/button/button.component";
+import { AuthFacadeService } from "../../../../store/facade.service";
+import { IUser } from "../../../../interfaces/IUser.interface";
 
 @Component({
   selector: "app-default-template",
@@ -36,7 +37,7 @@ export class DefaultTemplateComponent {
   public templateForm: FormGroup;
   public icons = freeSet;
   public defaultTemplateIcon = "cil-plus";
-  private _user$ = this._authFacadeService.user$;
+  private _user$: Observable<IUser | null>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,6 +49,8 @@ export class DefaultTemplateComponent {
       description: ["", Validators.required],
       questions: this.formBuilder.array([this.createQuestion()]),
     });
+
+    this._user$ = this._authFacadeService.user$;
   }
 
   get questions(): FormArray {

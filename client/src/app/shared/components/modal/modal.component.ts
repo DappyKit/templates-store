@@ -16,7 +16,7 @@ import {
   ModalTitleDirective,
 } from "@coreui/angular";
 import { Subscription } from "rxjs";
-import { SharedModalService } from "src/app/services/sharedModal.service";
+import { SharedModalService } from "../../../services/sharedModal.service";
 
 @Component({
   selector: "app-modal",

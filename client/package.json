@@ -3,18 +3,7 @@
   "version": "5.2.0",
   "copyright": "Copyright 2024 creativeLabs Łukasz Holeczek",
   "license": "MIT",
-  "author": "The CoreUI Team (https://github.com/orgs/coreui/people) and contributors",
   "homepage": "https://coreui.io/angular",
-  "config": {
-    "theme": "default",
-    "coreui_library_short_version": "5.2",
-    "coreui_library_docs_url": "https://coreui.io/angular/docs/"
-  },
-  "overrides": {
-    "angularx-qrcode": {
-      "@angular/core": "$@angular/core"
-    }
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,20 +13,20 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.0.4",
-    "@angular/cdk": "^18.0.4",
-    "@angular/common": "^18.0.4",
+    "@angular/animations": "^18.2.8",
+    "@angular/cdk": "^18.2.8",
+    "@angular/common": "^18.2.8",
     "@angular/compiler": "^18.0.4",
-    "@angular/core": "^18.0.4",
-    "@angular/forms": "^18.0.4",
+    "@angular/core": "^18.2.8",
+    "@angular/forms": "^18.2.8",
     "@angular/language-service": "^18.0.4",
     "@angular/platform-browser": "^18.0.4",
     "@angular/platform-browser-dynamic": "^18.0.4",
-    "@angular/router": "^18.0.4",
+    "@angular/router": "^18.2.8",
     "@coreui/angular": "~5.2.2",
     "@coreui/angular-chartjs": "~5.2.2",
     "@coreui/chartjs": "~4.0.0",
-    "@coreui/coreui": "~5.0.2",
+    "@coreui/coreui": "^5.1.2",
     "@coreui/icons": "^3.0.1",
     "@coreui/icons-angular": "~5.2.2",
     "@coreui/utils": "^2.0.2",
@@ -46,7 +35,7 @@
     "@ngrx/entity": "^18.0.1",
     "@ngrx/store": "^18.0.1",
     "@ngrx/store-devtools": "^18.0.1",
-    "angularx-qrcode": "^17.0.1",
+    "angularx-qrcode": "^18.0.2",
     "chart.js": "^4.4.3",
     "ethers": "^6.13.1",
     "lodash-es": "^4.17.21",

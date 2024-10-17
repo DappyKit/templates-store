@@ -1,4 +1,3 @@
-import { IModalAction } from '@coreui/angular/lib/modal/modal.service';
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { ModalService } from "@coreui/angular";
@@ -12,7 +11,7 @@ export class SharedModalService {
 
   constructor(private modalService: ModalService) {}
 
-  public toggle(action: IModalAction) {
+  public toggle(action: any) {
     this.modalService.toggle(action);
     this.modalStateSubject.next(action);
   }

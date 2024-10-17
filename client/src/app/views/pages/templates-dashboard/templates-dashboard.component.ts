@@ -2,8 +2,6 @@ import { CommonModule, NgStyle, NgTemplateOutlet } from "@angular/common";
 import { TemplateCardComponent } from "./template-card/template-card.component";
 import { Router, RouterOutlet } from "@angular/router";
 import { Component } from "@angular/core";
-import { ButtonComponent } from "src/app/shared/components/button/button.component";
-import { BUTTON_STYLE } from "src/app/constants/buttonColor";
 import { freeSet } from "@coreui/icons";
 import { IconDirective } from "@coreui/icons-angular";
 
@@ -22,9 +20,12 @@ import {
   InputGroupTextDirective,
   RowComponent,
 } from "@coreui/angular";
-import { MultiItemCarouselComponent } from "src/app/shared/components/carousel/multi-item-carousel.component";
-import { ITemplateItem } from "src/app/interfaces/ITemplateItem";
+
 import { DefaultTemplateComponent } from "./default-template/default-template.component";
+import { ButtonComponent } from "../../../shared/components/button/button.component";
+import { MultiItemCarouselComponent } from "../../../shared/components/carousel/multi-item-carousel.component";
+import { BUTTON_STYLE } from "../../../constants/buttonColor";
+import { ITemplateItem } from "../../../interfaces/ITemplateItem";
 
 @Component({
   selector: "app-templates-dashboard",

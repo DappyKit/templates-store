@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectorRef } from '@angular/core';
 import { SharedModalComponent } from './modal.component';
-import { SharedModalService } from 'src/app/services/sharedModal.service';
+
 import { Subject } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModalService } from '../../../services/sharedModal.service';
 
 describe('SharedModalComponent', () => {
   let component: SharedModalComponent;

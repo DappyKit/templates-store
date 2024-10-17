@@ -9,17 +9,20 @@ import { IUser } from '../interfaces/IUser.interface';
 import { IStatus } from '../interfaces/IStatus.interface';
 
 
-
 @Injectable({
     providedIn: 'root'
 })
 export class AuthFacadeService {
 
-  public selectQRcode$: Observable<string | null> = this.store.select(selectQRcode);
-  public channel$: Observable<IChannel | null> = this.store.select(selectChannel);
-  public user$: Observable<IUser | null> = this.store.select(user);
+  public selectQRcode$: Observable<string | null>;
+  public channel$: Observable<IChannel | null>;
+  public user$: Observable<IUser | null>;
 
-  constructor(private store: Store<AuthState>) {}
+  constructor(private store: Store<AuthState>) {
+    this.selectQRcode$ = this.store.select(selectQRcode);
+    this.channel$ = this.store.select(selectChannel);
+    this.user$ = this.store.select(user);
+  }
 
   public createChannel(): void {
     this.store.dispatch(AuthActions.createChannel());

@@ -14,9 +14,9 @@ import {
 } from "@coreui/angular";
 import { freeSet } from "@coreui/icons";
 import { IconDirective } from "@coreui/icons-angular";
-import { BUTTON_STYLE } from "src/app/constants/buttonColor";
-import { ButtonComponent } from "src/app/shared/components/button/button.component";
-import { NgStyle, NgTemplateOutlet } from "@angular/common";
+import { CommonModule, NgStyle, NgTemplateOutlet } from "@angular/common";
+import { ButtonComponent } from "../../../../shared/components/button/button.component";
+import { BUTTON_STYLE } from "../../../../constants/buttonColor";
 
 @Component({
   selector: "app-template-card",
@@ -36,6 +36,7 @@ import { NgStyle, NgTemplateOutlet } from "@angular/common";
     RouterLink,
     ButtonComponent,
     NgStyle,
+    CommonModule,
     NgTemplateOutlet,
   ],
   templateUrl: "./template-card.component.html",

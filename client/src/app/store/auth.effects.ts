@@ -1,19 +1,25 @@
 import { SessionService } from "../services/sessionService.service";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { from, of } from "rxjs";
-import { catchError, switchMap, map } from "rxjs/operators";
-import { AuthService } from "src/app/services/auth.service";
+import { catchError, switchMap, map, tap } from "rxjs/operators";
+
 import { AuthActions } from "./auth.actions";
 import { IChannel } from "../interfaces/IChannel.interface";
 import { IStatus, StatusState } from "../interfaces/IStatus.interface";
 import { Router } from "@angular/router";
 import { SESSION_VERIFICATION_DATA } from "../constants/localStorage.injectionToken";
+import { AuthService } from "../services/auth.service";
 
 @Injectable()
 export class AuthEffects {
-  public createChannel$ = createEffect(() =>
-    this.actions$.pipe(
+  private actions$ = inject(Actions);
+  private authService = inject(AuthService);
+  private _sessionService = inject(SessionService);
+  private _router = inject(Router);
+
+  public createChannel$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(AuthActions.createChannel),
       switchMap(() =>
         from(this.authService.createChannel()).pipe(
@@ -21,11 +27,12 @@ export class AuthEffects {
             AuthActions.createChannelSuccess({ channel }),
             AuthActions.getStatus({ channelToken: channel.channelToken }),
           ]),
-          catchError((error) => of(AuthActions.createChannelError({ error })))
+          catchError((error: Error) => of(AuthActions.createChannelError({ error })))
         )
       )
     )
-  );
+  
+});
 
   public getStatus$ = createEffect(() =>
     this.actions$.pipe(
@@ -43,9 +50,7 @@ export class AuthEffects {
             }
             return of(AuthActions.getStatusSuccess({ status }));
           }),
-          catchError((error) =>
-            of(AuthActions.getStatusError({ error: error }))
-          )
+          catchError((error) => of(AuthActions.getStatusError({ error })))
         )
       )
     )
@@ -55,18 +60,11 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(({ sessionData }) => {
-        return this.authService.login(sessionData).pipe(
+        return from(this.authService.login(sessionData)).pipe( // Use `from` if `login` returns a Promise
           map((user) => AuthActions.loginSuccess({ user })),
           catchError((error) => of(AuthActions.loginError({ error })))
         );
       })
     )
   );
-
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private _sessionService: SessionService,
-    private _router: Router
-  ) {}
 }

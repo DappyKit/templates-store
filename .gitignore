@@ -26,7 +26,6 @@ client/npm-debug.log
 client/yarn-error.log
 
 # Angular generated files
-/client/angular.json
 client/*.js
 client/*.js.map
 client/*.d.ts
@@ -34,7 +33,6 @@ client/*.d.ts
 
 # Angular CLI configuration files
 /client/karma.conf.js
-/client/tsconfig.json
 /client/tsconfig.app.json
 /client/tsconfig.spec.json
 /client/tslint.json

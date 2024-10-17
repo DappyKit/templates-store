@@ -1,8 +1,9 @@
-import { IUser } from 'src/app/interfaces/IUser.interface';
-import { IChannel } from 'src/app/interfaces/IChannel.interface';
+
 import { createReducer, on } from '@ngrx/store';
 import { AuthActions } from './auth.actions';
 import { IStatus } from '../interfaces/IStatus.interface';
+import { IUser } from '../interfaces/IUser.interface';
+import { IChannel } from '../interfaces/IChannel.interface';
 
 export interface AuthState {
   channel: IChannel | null;

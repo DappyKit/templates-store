@@ -4,9 +4,9 @@ import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angula
 import { LoginComponent } from './login.component';
 import { IconModule } from '@coreui/icons-angular';
 import { IconSetService } from '@coreui/icons-angular';
-import { AuthFacadeService } from 'src/app/store/facade.service';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthFacadeService } from '../../../store/facade.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
