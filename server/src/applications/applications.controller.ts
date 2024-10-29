@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { ApplicationService } from './application.service';
 
@@ -10,10 +10,13 @@ export class ApplicationsController {
     @Post('create')
     @HttpCode(204)
     create(@Body() createApplicationDto: CreateApplicationDto): Promise<any> {
-        console.log('server got request:', createApplicationDto);
         return this._appService.createApplication(createApplicationDto);
+    }
 
-        
+    @Get(':userId')
+    @HttpCode(200)
+    getUserApplications(@Param('userId') userId: number): Promise<any> {
+       return this._appService.findApplicationsByUserId(userId);
     }
 
 }

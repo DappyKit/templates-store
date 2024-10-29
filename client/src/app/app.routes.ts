@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout';
 import { canMatchGuard } from './guards/canMatchAuth.guard';
-import { UserApplicationsComponent } from './views/pages/user-applications/user-applications.component';
+import { UserApplicationsComponent } from './views/pages/applications/user-applications/user-applications.component';
 
 export const routes: Routes = [
   {
@@ -15,8 +15,9 @@ export const routes: Routes = [
         canLoad: [canMatchGuard],
       },
       {
-        path: 'my-apps',
+        path: 'apps',
         component: UserApplicationsComponent,
+        canMatch: [canMatchGuard],
       },
     ]
   },

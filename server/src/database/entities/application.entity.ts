@@ -24,5 +24,8 @@ export class Application {
 
     @Column({ default: false })
     isPublic: boolean;
+
+    @Column({ nullable: true })
+    userId: number; // Define the userId column
 }
 

@@ -1,0 +1,4 @@
+
+@for(app of (applications$ | async); track app.id){
+    <div>{{app.title}}</div>
+}

@@ -13,7 +13,7 @@ import { UserService } from 'src/users/user.service';
 export class ApplicationService {
   constructor(
     @Inject('APPLICATION_REPOSITORY')
-    private readonly quizRepository: Repository<Application>,
+    private readonly appRepository: Repository<Application>,
     private userService: UserService,
 
   ) {}
@@ -42,8 +42,16 @@ export class ApplicationService {
     newQuiz.user = user;
 
     // 3. Save the quiz and its associated questions (with cascade: true, questions will be saved)
-    const savedQuiz = await this.quizRepository.save(newQuiz);
+    const savedQuiz = await this.appRepository.save(newQuiz);
     
     return savedQuiz;
   }
+
+
+  public async findApplicationsByUserId(userId: number): Promise<Application[]> {
+    return this.appRepository.find({
+      where: { userId },
+    });
+  }
+  
 }
