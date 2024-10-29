@@ -1,4 +1,4 @@
-<div class="app-default-template">
+<!-- <div class="app-default-template">
   <div [ngStyle]="{background: image}">
     <h3>{{title}}</h3>
     <p>{{description}}</p>
@@ -8,4 +8,21 @@
     <svg [cIcon]="icons.cilPlus" size="lg" title="Plus"></svg>
     Create App
   </app-button>
-</div>
+</div> -->
+
+<c-row>
+  <!-- <c-col *ngFor="let item of colors; index as i" [lg]="4"> -->
+  <c-card [cBorder]="{top: {color: 'primary', width: 3}}" [textColor]="'primary'" class="mb-3">
+    <c-card-header>{{title}}</c-card-header>
+    <c-card-body>
+      <!-- <h5 cCardTitle>{{title}}</h5> -->
+      <p cCardText>
+        {{description}}
+      </p>
+      <button [color]="'primary'" cButton (click)="openTemplate()"> <svg [cIcon]="icons.cilPlus" size="lg"
+          title="Plus"></svg>
+        Create App</button>
+    </c-card-body>
+  </c-card>
+  <!-- </c-col> -->
+</c-row>

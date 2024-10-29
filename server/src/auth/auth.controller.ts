@@ -14,9 +14,7 @@ export class AuthController {
       throw new HttpException({
         status: HttpStatus.BAD_REQUEST,
         error: 'No data provided',
-      }, HttpStatus.BAD_REQUEST, {
-        cause: new Error()
-      });
+      }, HttpStatus.BAD_REQUEST);
     }
    return this.authService.signIn(status);
   }

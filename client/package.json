@@ -1,7 +1,6 @@
 {
   "name": "coreui-free-angular-admin-template",
   "version": "5.2.0",
-  "copyright": "Copyright 2024 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "homepage": "https://coreui.io/angular",
   "scripts": {

@@ -1,4 +1,4 @@
-<div class="app-default-template">
+ <div class="app-default-template">
   <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="title">Title</label>
@@ -81,9 +81,16 @@
         <svg [cIcon]="icons.cilPlus" size="lg" title="Plus"></svg>
       </app-button>
     </div>
-    
-    <div class="app-default-template_submit-button-container">
-      <button type="submit" class="btn btn-primary" [disabled]="templateForm.invalid">Submit</button>
+    <div class="app-default-template_footer">
+      <c-form-check [switch]="true" [cTooltip]="tooltipText" cTooltipPlacement="top" class="me-1 app-default-template_footer-toggle" color="secondary">
+        <input cFormCheckInput type="checkbox" formControlName="isPublic" (change)="setIsPublic($event)"/>
+        <label cFormCheckLabel>Public</label>
+      </c-form-check>
+      
+      <div class="app-default-template_footer-submitbtn">
+        <button type="submit" class="btn btn-primary" [disabled]="templateForm.invalid">Submit</button>
+      </div>
     </div>
+
   </form>
-</div>
+</div> 

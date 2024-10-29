@@ -1,7 +1,13 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import {
+  BorderDirective,
   ButtonDirective,
+  CardBodyComponent,
+  CardComponent,
+  CardHeaderComponent,
+  CardTextDirective,
+  CardTitleDirective,
   ColComponent,
   DropdownComponent,
   DropdownItemDirective,
@@ -9,12 +15,13 @@ import {
   DropdownToggleDirective,
   RowComponent,
   TemplateIdDirective,
+  TextColorDirective,
   ThemeDirective,
   WidgetStatAComponent,
 } from "@coreui/angular";
 import { freeSet } from "@coreui/icons";
 import { IconDirective } from "@coreui/icons-angular";
-import { CommonModule, NgStyle, NgTemplateOutlet } from "@angular/common";
+import { CommonModule, NgFor, NgStyle, NgTemplateOutlet } from "@angular/common";
 import { ButtonComponent } from "../../../../shared/components/button/button.component";
 import { BUTTON_STYLE } from "../../../../constants/buttonColor";
 
@@ -38,6 +45,8 @@ import { BUTTON_STYLE } from "../../../../constants/buttonColor";
     NgStyle,
     CommonModule,
     NgTemplateOutlet,
+
+    NgFor, TextColorDirective, CardComponent, BorderDirective, CardHeaderComponent, CardBodyComponent, CardTitleDirective, CardTextDirective, ButtonDirective
   ],
   templateUrl: "./template-card.component.html",
   styleUrl: "./template-card.component.scss",

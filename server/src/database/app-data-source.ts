@@ -3,6 +3,9 @@ import { DataSource } from 'typeorm';
 import { User } from './entities/user.entity';
 import { App } from './entities/app.entity';
 
+import { Question } from './entities/question.entity';
+import { Application } from './entities/application.entity';
+
 const envFile = `.env.${process.env.NODE_ENV || 'development'}`;
 config({ path: envFile });
 
@@ -13,7 +16,8 @@ export const AppDataSource = new DataSource({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  entities: [User, App],
+  entities: [User, Application, Question],
   migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
   synchronize: true,
+  logging: true
 });

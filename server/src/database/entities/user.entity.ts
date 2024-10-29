@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, OneToMany } from 'typeorm';
+import { Application } from './application.entity';
 
-@Entity()
+@Entity('users')
 export class User {
 
   @PrimaryColumn()
@@ -14,4 +15,8 @@ export class User {
 
   @Column()
   photoUrl: string;
+
+  @OneToMany(() => Application, (quiz) => quiz.user)
+  applications: Application[];
+
 }

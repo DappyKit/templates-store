@@ -1,3 +1,4 @@
+import { Optional } from '@nestjs/common';
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
@@ -12,6 +13,7 @@ export class App {
   description: string;
 
   @Column()
+  @Optional()
   icon: string;
 
   @Column()
@@ -23,11 +25,11 @@ export class App {
   @Column()
   authorId: number;
 
-  @Column()
-  gitHub: string;
+  // @Column()
+  // gitHub: string;
 
-  @Column()
-  appFormConfig: string;
+  // @Column()
+  // appFormConfig: string;
 
   @Column()
   isPublic: boolean;

@@ -22,15 +22,25 @@
     align-self: center;
   }
 
-  &_submit-button-container {
+  &_footer {
     position: sticky;
     bottom: 0;
     right: 0;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     padding: 1rem;
     background-color: rgb(243, 244, 247);
     z-index: 1000;
     transition: transform 0.3s ease-out;
+
+    &-submitbtn {
+      margin-left: 10px;
+    }
+
+    &-toggle {
+      padding: 10px 0;
+    }
   }
+
 }

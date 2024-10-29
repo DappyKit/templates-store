@@ -9,6 +9,7 @@ export const templatesDashboardRoutes: Routes = [
     data: { title: 'templates-dashboard' },
    
   },
+
   {
     path: 'default',
     component: DefaultTemplateComponent,

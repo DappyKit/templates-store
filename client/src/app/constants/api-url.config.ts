@@ -4,5 +4,5 @@ export const baseUrl = environment.apiUrl;
 
 export namespace ApiPath {
   export const LOGIN = `${baseUrl}/auth/login`;
-  export const CREATE_APP = `${baseUrl}/auth/createApp`;
+  export const CREATE_APP = `${baseUrl}/applications/create`;
 }

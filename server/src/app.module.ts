@@ -5,10 +5,11 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
+import { ApplicationModule } from './applications/application.module';
 
 
 @Module({
-  imports: [AuthModule, UserModule, ConfigModule.forRoot({
+  imports: [AuthModule, UserModule, ApplicationModule, ConfigModule.forRoot({
     isGlobal: true,
     cache: true,
     envFilePath: [`.env.${process.env.NODE_ENV}`],

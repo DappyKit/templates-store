@@ -1,7 +1,8 @@
 import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { User } from './entities/user.entity';
-import { App } from './entities/app.entity';
+import { Application } from './entities/application.entity';
+import { Question } from './entities/question.entity';
 
 export const databaseProviders = [
   {
@@ -14,11 +15,11 @@ export const databaseProviders = [
         username: configService.get<string>('DATABASE_USER'),
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
-        entities: [User, App],
+        entities: [User, Application, Question],
         migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
         synchronize: false,
       });
-
+        
       return dataSource.initialize();
     },
     inject: [ConfigService],

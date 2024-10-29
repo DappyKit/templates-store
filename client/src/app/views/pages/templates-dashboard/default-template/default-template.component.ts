@@ -9,7 +9,7 @@ import {
   FormControl,
   AbstractControl,
 } from "@angular/forms";
-import { TemplateIdDirective, ButtonDirective, FormModule } from "@coreui/angular";
+import { TemplateIdDirective, ButtonDirective, FormModule, RowComponent, ColComponent, TextColorDirective, WidgetStatBComponent, ProgressBarDirective, ProgressComponent, ProgressBarComponent, TooltipDirective } from "@coreui/angular";
 import { RouterLink } from "@angular/router";
 import { IconDirective } from "@coreui/icons-angular";
 import { freeSet } from "@coreui/icons";
@@ -28,7 +28,8 @@ import { IUser } from "../../../../interfaces/IUser.interface";
     ButtonDirective,
     RouterLink,
     ButtonComponent,
-    FormModule
+    FormModule,
+    TooltipDirective
   ],
   templateUrl: "./default-template.component.html",
   styleUrls: ["./default-template.component.scss"],
@@ -39,6 +40,8 @@ export class DefaultTemplateComponent {
   public defaultTemplateIcon = "cil-plus";
   private _user$: Observable<IUser | null>;
 
+  public tooltipText = "Public by default. Toggle below to make private.";
+
   constructor(
     private formBuilder: FormBuilder,
     private _templateService: TemplateService,
@@ -48,6 +51,7 @@ export class DefaultTemplateComponent {
       title: ["", Validators.required],
       description: ["", Validators.required],
       questions: this.formBuilder.array([this.createQuestion()]),
+      isPublic: [true],
     });
 
     this._user$ = this._authFacadeService.user$;
@@ -80,6 +84,10 @@ export class DefaultTemplateComponent {
     return answerIdx.toString();
   }
 
+  public setIsPublic(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.templateForm.get('isPublic')?.setValue(isChecked);
+  }
 
   createQuestion(): FormGroup {
     return this.formBuilder.group({
@@ -88,16 +96,16 @@ export class DefaultTemplateComponent {
       correctAnswerIndex: [0, Validators.required]
     });
   }
-  
+
   createAnswer(): FormControl {
     return this.formBuilder.control('', Validators.required);
   }
-  
+
   public async onSubmit(): Promise<void> {
     const user = await firstValueFrom(this._user$);
     if (this.templateForm.valid && user && user.id) {
-      this._templateService.createTemplate(user.id, this.templateForm.value);
-      console.log("Form Submitted", this.templateForm.value);
+      this._templateService.createTemplate(user.id, this.templateForm.value).subscribe();
+      console.log("Form Submitted", JSON.stringify(this.templateForm.value));
     } else {
       console.log("Form is invalid");
     }

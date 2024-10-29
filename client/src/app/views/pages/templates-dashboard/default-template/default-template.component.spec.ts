@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { DefaultTemplateComponent } from "./default-template.component";
-import { TemplateService } from "src/app/services/template.service";
+
 import { FormBuilder } from "@angular/forms";
-import { AuthFacadeService } from "src/app/store/facade.service";
+
 import { ReplaySubject } from "rxjs";
+import { TemplateService } from "../../../../services/template.service";
+import { AuthFacadeService } from "../../../../store/facade.service";
 
 describe("DefaultTemplateComponent", () => {
   let component: DefaultTemplateComponent;

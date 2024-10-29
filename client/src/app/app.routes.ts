@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout';
 import { canMatchGuard } from './guards/canMatchAuth.guard';
+import { UserApplicationsComponent } from './views/pages/user-applications/user-applications.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,10 @@ export const routes: Routes = [
         path: 'templates',
         loadChildren: () => import('./views/pages/templates-dashboard/routes').then((m) => m.templatesDashboardRoutes),
         canLoad: [canMatchGuard],
+      },
+      {
+        path: 'my-apps',
+        component: UserApplicationsComponent,
       },
     ]
   },

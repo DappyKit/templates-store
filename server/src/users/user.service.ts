@@ -11,9 +11,9 @@ export class UserService {
   ) {}
 
 
-  async createUser({id, userName, displayName, photoUrl}): Promise<User> {
+  public async createUser({id, userName, displayName, photoUrl}): Promise<User> {
     const savedUser = await this.findUser(id);
-
+    
     if (savedUser) return savedUser;
 
     const user = this.userRepository.create({
@@ -25,7 +25,9 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  private findUser(id: number): Promise<User>{
+  public findUser(id: number): Promise<User>{
    return this.userRepository.findOneBy({ id });
   }
+
+
 }
