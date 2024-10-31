@@ -1,28 +1,16 @@
-import { SharedModalService } from './../services/sharedModal.service';
-import { LoginComponent } from './../views/pages/login/login.component';
-import { AfterViewInit } from '@angular/core';
-import { SharedModalComponent } from './../shared/components/modal/modal.component';
-import { ModalHostDirective } from './../directives/modal-host.directive';
-import { Component, ViewChild } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { RouterLink, RouterOutlet } from "@angular/router";
+import { ContainerComponent, ShadowOnScrollDirective, SidebarBrandComponent, SidebarComponent, SidebarFooterComponent, SidebarHeaderComponent, SidebarNavComponent, SidebarToggleDirective, SidebarTogglerDirective } from "@coreui/angular";
+import { IconDirective } from "@coreui/icons-angular";
+import { DefaultHeaderComponent } from "./header/header.component";
+import { DefaultFooterComponent } from "./footer/footer.component";
+import { ModalHostDirective } from "../directives/modal-host.directive";
+import { SharedModalComponent } from "../shared/components/modal/modal.component";
+import { LoginComponent } from "../views/login/login.component";
+import { navItems } from "./nav";
+import { SharedModalService } from "../services/sharedModal.service";
+import { MODAL_ID } from "../constants/modal-id";
 import { NgScrollbar } from 'ngx-scrollbar';
-
-import { IconDirective } from '@coreui/icons-angular';
-import {
-  ContainerComponent,
-  ShadowOnScrollDirective,
-  SidebarBrandComponent,
-  SidebarComponent,
-  SidebarFooterComponent,
-  SidebarHeaderComponent,
-  SidebarNavComponent,
-  SidebarToggleDirective,
-  SidebarTogglerDirective
-} from '@coreui/angular';
-
-import { DefaultFooterComponent, DefaultHeaderComponent } from '.';
-import { navItems } from './nav';
-import { MODAL_ID } from '../constants/modal-id';
 
 
 @Component({

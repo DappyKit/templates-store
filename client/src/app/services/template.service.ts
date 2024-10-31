@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ApiPath } from "../constants/api-url.config";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -8,7 +9,7 @@ import { ApiPath } from "../constants/api-url.config";
 export class TemplateService {
   constructor(private _http: HttpClient) {}
 
-  public createTemplate(userId: number, app: any) {
+  public createApp(userId: number, app: any): Observable<any> {
     const body = {
       userId,
       ...app,
